@@ -213,7 +213,7 @@ class ProcessorConfigKwargs(TypedDict, total=False):
 
 def make_pre_post_processors(
     policy_cfg: PreTrainedConfig,
-    pretrained_path: str | None = None,
+    pretrained_path: str(cfg.pretrained_path).replace("\\", "/")
     **kwargs: Unpack[ProcessorConfigKwargs],
 ) -> tuple[
     PolicyProcessorPipeline[dict[str, Any], dict[str, Any]],
