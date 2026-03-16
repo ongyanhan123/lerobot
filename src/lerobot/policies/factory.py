@@ -241,6 +241,10 @@ def make_pre_post_processors(
         NotImplementedError: If a processor factory is not implemented for the given
             policy configuration type.
     """
+    # Normalize path to use forward slashes for HuggingFace Hub repo IDs on Windows, changed on 100326
+    if pretrained_path:
+        pretrained_path = str(pretrained_path).replace("\\", "/")
+        
     if pretrained_path:
         # TODO(Steven): Temporary patch, implement correctly the processors for Gr00t
         if isinstance(policy_cfg, GrootConfig):
