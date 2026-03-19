@@ -157,6 +157,7 @@ def create_camera_instance(cam_meta: dict[str, Any]) -> dict[str, Any] | None:
     """Create and connect to a camera instance based on metadata."""
     cam_type = cam_meta.get("type")
     cam_id = cam_meta.get("id")
+    cam_name = cam_meta.get("name")
     instance = None
 
     logger.info(f"Preparing {cam_type} ID {cam_id} with default profile")
@@ -170,7 +171,7 @@ def create_camera_instance(cam_meta: dict[str, Any]) -> dict[str, Any] | None:
             instance = OpenCVCamera(cv_config)
         elif cam_type == "RealSense":
             rs_config = RealSenseCameraConfig(
-                serial_number_or_name=cam_id,
+                serial_number_or_name=cam_name,
                 color_mode=ColorMode.RGB,
             )
             instance = RealSenseCamera(rs_config)
